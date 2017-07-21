@@ -26,9 +26,11 @@ var bot = new builder.UniversalBot(connector, function (session) {
 var recognizer = new builder.LuisRecognizer(process.env.LUIS_MODEL_URL);
 bot.recognizer(recognizer);
 
-bot.dialog('askdata',[ function(session, args){ 
+bot.dialog('askdata', function(session, args){ 
 var isContainName = builder.EntityRecognizer.findEntity(args.intent.entities,'getname'); 
 var isContainWhat = builder.EntityRecognizer.findEntity(args.intent.entities,'iswhat'); 
+
+//session.send(isContainName.entity + "    "  + isContainWhat.entity);
 
 if (isContainName && isContainWhat){ 
              var isName = isContainName.entity;
@@ -38,10 +40,11 @@ if (isContainName && isContainWhat){
 			 var url = "http://wanderer.cloud/bots/botgetsetdata/testData.php?strIsName=" + isName + "&strIsWhat=" + isWhat;
 			 request(url,function(error,response,body){ 
 			    body = JSON.parse(body);
-			    if(response.statusCode == 200)
+				outputstatus=body.success;
+			    if(response.statusCode == 200 && outputstatus=='true')
 				{
 			        temp = body.data;
-					
+					//session.send(body.success);
 			        /*var msg = new builder.Message(session) 
                     .attachments([ 
                                    new builder.ThumbnailCard() 
@@ -61,61 +64,16 @@ if (isContainName && isContainWhat){
 	     }
 		 else
 		 {
+			 session.send(isContainName.entity + "    "  + isContainWhat.entity);
+			 
      		 builder.Prompts.text(session, 'Please enter like  \'what is your name\' or \'what name\' or \'what name is yours\' or \'my name is bob. what is your name\' or \'help\' to get response string'); 
 		 } 
-		 },
-		 function(session,results){ 
-		    var city_name = results.response; 
-			console.write("ELSE Data is: "+ city_name);
-			session.send("ELSE Data is: "+ city_name);
-			var dataname=session.message.text;
-		    var url = "http://wanderer.cloud/bots/botgetsetdata/testData.php?str=" + city_name; 
-		    request(url,function(error,response,body){ 
-		        body = JSON.parse(body); 
-			    if(response.statusCode == 200)
-			    {
-			       temp = body.data;
-					
-			        /*var msg = new builder.Message(session) 
-                    .attachments([ 
-                                   new builder.ThumbnailCard() 
-			                       .title("Sample Read Write Data Demo")
-								   .text("Data is: " + temp) 
-								   
-                
-                                ]); */
-                    session.send(temp);
-				}
-				else
-				{
-				   builder.Prompts.text(session, 'oops!! Entered string is not found.'); 
-			    }
-			  }); 
-			} 
-			]).triggerAction({
+		 }).triggerAction({
     matches: 'askdata'
 });
 
 bot.dialog('Help', function (session) {
-    session.endDialog('Hi! Try asking me things like  \'your name\' or \'name please\' or \'what is your name\' or \'help\' to get response string');
+    session.endDialog('Hi! Try asking me things like  \'what is your name\' or \'what name\' or \'what name is yours\' or \'my name is bob. what is your name\' or \'help\' to get response string');
 }).triggerAction({
     matches: 'Help'
 });
-
-// Spell Check
-if (process.env.IS_SPELL_CORRECTION_ENABLED === 'true') {
-    bot.use({
-        botbuilder: function (session, next) {
-            spellService
-                .getCorrectedText(session.message.text)
-                .then(function (text) {
-                    session.message.text = text;
-                    next();
-                })
-                .catch(function (error) {
-                    console.error(error);
-                    next();
-                });
-        }
-    });
-}

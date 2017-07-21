@@ -17,9 +17,11 @@ var connector = new builder.ChatConnector({
 });
 server.post('/api/messages', connector.listen());
 
+
 var bot = new builder.UniversalBot(connector, function (session) {
     session.send('Sorry, I did not understand \'%s\'. Type \'help\' if you need assistance.', session.message.text);
 }); 
+
 
 // You can provide your own model by specifing the 'LUIS_MODEL_URL' environment variable
 // This Url can be obtained by uploading or creating your model from the LUIS portal: https://www.luis.ai/
@@ -64,9 +66,9 @@ if (isContainName && isContainWhat){
 	     }
 		 else
 		 {
-			 session.send(isContainName.entity + "    "  + isContainWhat.entity);
+			 session.send('Hello, Please enter like  \'what is your name\' or \'what name\' or \'what name is yours\' or \'my name is bob. what is your name\' to get response string');
+             //session.beginDialog('/createSubscription');
 			 
-     		 builder.Prompts.text(session, 'Please enter like  \'what is your name\' or \'what name\' or \'what name is yours\' or \'my name is bob. what is your name\' or \'help\' to get response string'); 
 		 } 
 		 }).triggerAction({
     matches: 'askdata'
@@ -77,3 +79,22 @@ bot.dialog('Help', function (session) {
 }).triggerAction({
     matches: 'Help'
 });
+
+
+// Spell Check
+if (process.env.IS_SPELL_CORRECTION_ENABLED === 'true') {
+    bot.use({
+        botbuilder: function (session, next) {
+            spellService
+                .getCorrectedText(session.message.text)
+                .then(function (text) {
+                    session.message.text = text;
+                    next();
+                })
+                .catch(function (error) {
+                    console.error(error);
+                    next();
+                });
+        }
+    });
+}
