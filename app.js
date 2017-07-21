@@ -31,9 +31,6 @@ bot.recognizer(recognizer);
 bot.dialog('askdata', function(session, args){ 
 var isContainName = builder.EntityRecognizer.findEntity(args.intent.entities,'getname'); 
 var isContainWhat = builder.EntityRecognizer.findEntity(args.intent.entities,'iswhat'); 
-
-//session.send(isContainName.entity + "    "  + isContainWhat.entity);
-
 if (isContainName && isContainWhat){ 
              var isName = isContainName.entity;
 			 var isWhat = isContainWhat.entity;
@@ -46,17 +43,7 @@ if (isContainName && isContainWhat){
 			    if(response.statusCode == 200 && outputstatus=='true')
 				{
 			        temp = body.data;
-					//session.send(body.success);
-			        /*var msg = new builder.Message(session) 
-                    .attachments([ 
-                                   new builder.ThumbnailCard() 
-			                       .title("Sample Read Write Data Demo")
-								   .text("Data is: " + temp) 
-								   
-                
-                                ]); */
-								
-                    session.send(temp);
+					session.send(temp);
 			    }
 				else
 				{
@@ -66,11 +53,9 @@ if (isContainName && isContainWhat){
 	     }
 		 else
 		 {
-			 session.send('Hello, Welcome in the Bot Demo');
-			 
+						 
 			 session.send('Please enter like  \'what is your name\' or \'what name\' or \'what name is yours\' or \'my name is bob. what is your name\' to get response string');
-             //session.beginDialog('/createSubscription');
-			 
+             			 
 		 } 
 		 }).triggerAction({
     matches: 'askdata'
