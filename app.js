@@ -66,7 +66,9 @@ if (isContainName && isContainWhat){
 	     }
 		 else
 		 {
-			 session.send('Hello, Please enter like  \'what is your name\' or \'what name\' or \'what name is yours\' or \'my name is bob. what is your name\' to get response string');
+			 session.send('Hello, Welcome in the Bot Demo');
+			 
+			 session.send('Please enter like  \'what is your name\' or \'what name\' or \'what name is yours\' or \'my name is bob. what is your name\' to get response string');
              //session.beginDialog('/createSubscription');
 			 
 		 } 
