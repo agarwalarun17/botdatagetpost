@@ -1,0 +1,30 @@
+{
+  "name": "botbuilder-sample-luis",
+  "version": "1.0.0",
+  "description": "Bot Builder Sample - LUIS",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Arun Agarwal",
+  "license": "MIT",
+  "keywords": [
+    "botbuilder",
+    "bots",
+    "chatbots",
+    "botbuilder-samples"
+  ],
+  "bugs": {
+    "url": "https://github.com/Microsoft/BotBuilder-Samples/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agarwalarun17/luis-bot-hotelfinderDemo.git"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.7",
+    "botbuilder": "^3.8.2",
+    "dotenv-extended": "^1.0.4",
+    "request": "^2.81.0",
+    "restify": "^4.3.0"
+  }
+}

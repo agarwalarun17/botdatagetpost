@@ -1,0 +1,156 @@
+{
+  "luis_schema_version": "2.1.0",
+  "versionId": "0.1",
+  "name": "botreadwritedata",
+  "desc": "",
+  "culture": "en-us",
+  "intents": [
+    {
+      "name": "askdata"
+    },
+    {
+      "name": "help"
+    },
+    {
+      "name": "None"
+    }
+  ],
+  "entities": [
+    {
+      "name": "getname"
+    },
+    {
+      "name": "iswhat"
+    }
+  ],
+  "composites": [],
+  "closedLists": [],
+  "bing_entities": [],
+  "actions": [],
+  "model_features": [],
+  "regex_features": [],
+  "utterances": [
+    {
+      "text": "help",
+      "intent": "help",
+      "entities": []
+    },
+    {
+      "text": "what is your name",
+      "intent": "askdata",
+      "entities": [
+        {
+          "entity": "getname",
+          "startPos": 13,
+          "endPos": 16
+        },
+        {
+          "entity": "iswhat",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "i need help",
+      "intent": "help",
+      "entities": []
+    },
+    {
+      "text": "your name",
+      "intent": "askdata",
+      "entities": [
+        {
+          "entity": "getname",
+          "startPos": 5,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "name please",
+      "intent": "askdata",
+      "entities": [
+        {
+          "entity": "getname",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "what is name",
+      "intent": "askdata",
+      "entities": [
+        {
+          "entity": "getname",
+          "startPos": 8,
+          "endPos": 11
+        },
+        {
+          "entity": "iswhat",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "how can i help you",
+      "intent": "help",
+      "entities": []
+    },
+    {
+      "text": "may i know your name please",
+      "intent": "askdata",
+      "entities": [
+        {
+          "entity": "getname",
+          "startPos": 16,
+          "endPos": 19
+        }
+      ]
+    },
+    {
+      "text": "may i help you",
+      "intent": "help",
+      "entities": []
+    },
+    {
+      "text": "my name is arun, what is your name",
+      "intent": "askdata",
+      "entities": [
+        {
+          "entity": "getname",
+          "startPos": 3,
+          "endPos": 6
+        },
+        {
+          "entity": "getname",
+          "startPos": 30,
+          "endPos": 33
+        },
+        {
+          "entity": "iswhat",
+          "startPos": 17,
+          "endPos": 20
+        }
+      ]
+    },
+    {
+      "text": "what name is yours",
+      "intent": "askdata",
+      "entities": [
+        {
+          "entity": "getname",
+          "startPos": 5,
+          "endPos": 8
+        },
+        {
+          "entity": "iswhat",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    }
+  ]
+}
